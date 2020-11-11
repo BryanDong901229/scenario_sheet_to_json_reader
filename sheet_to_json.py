@@ -40,9 +40,9 @@ def insert_agent_actions(f,row_num,action_num_obj,worksheet):
                                 f.write('\n\t\t\t"params": {')
                                 f.write('\n\t\t\t\t"t": %s,'% worksheet.cell(current_row,4).value)
                                 if worksheet.cell(current_row,3).value in ['lf','ci','rtc','rv','cm']:
-                                        f.write('\n\t\t\t\t"ax": %s'% worksheet.cell(current_row,5).value)
+                                        f.write('\n\t\t\t\t"a": %s'% worksheet.cell(current_row,5).value)
                                 elif worksheet.cell(current_row,3).value in ['lc','co','rob','lm']:
-                                        f.write('\n\t\t\t\t"ax": %s,'% worksheet.cell(current_row,5).value)
+                                        f.write('\n\t\t\t\t"a": %s,'% worksheet.cell(current_row,5).value)
                                         if worksheet.cell(current_row,3).value == "lm":
                                                 f.write('\n\t\t\t\t"dl": %s'% worksheet.cell(current_row,6).value)
                                         elif worksheet.cell(current_row,3).value == "rob":
