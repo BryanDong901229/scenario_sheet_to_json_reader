@@ -13,7 +13,10 @@ def insert_agent_ini_status(f,row_num,worksheet):
         f.write('\n\t\t"yaw": %s,'% worksheet.cell(row_num + 4,2).value)
         f.write('\n\t\t"ds": %s,'% worksheet.cell(row_num + 5,2).value)
         f.write('\n\t\t"dl": %s,'% worksheet.cell(row_num + 6,2).value)
-        f.write('\n\t\t"dv": %s,'% worksheet.cell(row_num + 7,2).value)
+        if worksheet.cell(row_num + 7,3).value == "v":
+                f.write('\n\t\t"v": %s,'% worksheet.cell(row_num + 7,2).value)
+        else:
+                f.write('\n\t\t"dv": %s,'% worksheet.cell(row_num + 7,2).value)
         f.write('\n\t\t"da": %s,'% worksheet.cell(row_num + 8,2).value)
         f.write('\n\t\t"vmx": %s,'% worksheet.cell(row_num + 9,2).value)
         f.write('\n\t\t"vmn": %s,'% worksheet.cell(row_num + 10,2).value)
@@ -31,7 +34,8 @@ def insert_agent_actions(f,row_num,action_num_obj,worksheet):
                 #f.write('\n\t\t\t"action": action_type,')
                 if worksheet.cell(current_row,3).value == "ta":
                         f.write('\n\t\t\t"action": "' + action_type + '",')
-                        f.write('\n\t\t\t"expr": "x{self} - x{ego} <= {{dist}}",')
+                        #f.write('\n\t\t\t"expr": "s{2} - s{1} < {{dist}}",')
+                        f.write('\n\t\t\t"expr": "s{%s'% int(worksheet.cell(current_row,4).value) + '} - s{%s'% int(worksheet.cell(current_row,5).value) + '} < {{dist}}",')
                         f.write('\n\t\t\t"params": {')
                         f.write('\n\t\t\t\t"dist": %s'% worksheet.cell(current_row,6).value)
                         f.write('\n\t\t\t}')
@@ -106,6 +110,7 @@ def xlsx_to_json(worksheet,f):
         #ego info
         f.write('\n\t"ego":')
         f.write("\n\t{")
+        f.write('\n\t\t"dl": %s,'% worksheet.cell(4,2).value)
         f.write('\n\t\t"w": %s,'% worksheet.cell(5,2).value)
         f.write('\n\t\t"l": %s,'% worksheet.cell(6,2).value)
         f.write('\n\t\t"h": %s,'% worksheet.cell(7,2).value)
