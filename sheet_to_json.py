@@ -129,17 +129,17 @@ def xlsx_to_json(worksheet,f):
         #insert action lists for object 1
         insert_agent_actions(f,22,action_num_obj1,worksheet)
         #object 1 finish }
-        f.write("\n\t}")
-        #f.write("\n\t},")
-        #object 2 start {
-        #f.write("\n\t{")
-        #insert initilize parameters for object 2
-        #insert_agent_ini_status(f,36,worksheet)
-        #action_num_obj2 = worksheet.cell(47,3).value
-        #insert action lists for object 2
-        #insert_agent_actions(f,47,action_num_obj2,worksheet)
-        #object 2 finish }
         #f.write("\n\t}")
+        f.write("\n\t},")
+        #object 2 start {
+        f.write("\n\t{")
+        #insert initilize parameters for object 2
+        insert_agent_ini_status(f,27,worksheet)
+        action_num_obj2 = worksheet.cell(38,3).value
+        #insert action lists for object 2
+        insert_agent_actions(f,38,action_num_obj2,worksheet)
+        #object 2 finish }
+        f.write("\n\t}")
         #objects finish ]
         f.write('\n\t]')
         #the whole file finish }
